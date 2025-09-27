@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvhu5f6guikq4"]
+
+[ext_resource type="Script" uid="uid://b317seaymjenv" path="res://script/s_3.gd" id="1_urpop"]
+[ext_resource type="Texture2D" uid="uid://xln4ovgpfapb" path="res://asset/Edgar Family Heir/A/idle.png" id="2_rqax6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5wyd"]
+atlas = ExtResource("2_rqax6")
+region = Rect2(0, 0, 172, 453)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myvvk"]
+atlas = ExtResource("2_rqax6")
+region = Rect2(0, 0, 172, 453)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cql86"]
+atlas = ExtResource("2_rqax6")
+region = Rect2(0, 0, 172, 453)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lf2rr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5wyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myvvk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cql86")
+}],
+"loop": true,
+"name": &"Linton S3",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t4kg7"]
+radius = 5.0
+height = 22.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_urpop")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.99999857, -1)
+scale = Vector2(0.052, 0.05)
+sprite_frames = SubResource("SpriteFrames_lf2rr")
+animation = &"Linton S3"
+autoplay = "Linton S3"
+frame_progress = 0.52843446
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_t4kg7")

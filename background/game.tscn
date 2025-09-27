@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://elst0xn32iil"]
+
+[ext_resource type="PackedScene" uid="uid://bvhu5f6guikq4" path="res://background/S3.tscn" id="1_3xk0f"]
+[ext_resource type="Texture2D" uid="uid://316iyska1mi2" path="res://addons/rat sewer tile set/Sewer tileset.png" id="2_lrcfv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fd14k"]
+texture = ExtResource("2_lrcfv")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7u0b5"]
+texture = ExtResource("2_lrcfv")
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-14.658486, -13.939052, 14.658486, -13.759192, 14.478627, 13.579334, -14.298769, 13.219616)
+8:1/0 = 0
+9:1/0 = 0
+0:4/size_in_atlas = Vector2i(6, 2)
+0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-47.842422, -16.187286, 47.662567, -16.007427, 48.741714, 16.007425, -48.561855, 15.82757)
+0:2/size_in_atlas = Vector2i(2, 2)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-47.842422, -16.187286, -35.791885, 18.885168, 48.741714, 16.007425, -48.561855, 15.82757)
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15.827568, 1.4388695, -16.007423, -15.827568, 1.079155, -16.007427, 16.007431, -15.827568, 16.007431, 15.647711, -15.647705, 15.82757)
+2:0/size_in_atlas = Vector2i(4, 2)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-47.842422, -16.187286, 47.662567, -16.007427, 48.741714, 16.007425, -48.561855, 15.82757)
+2:2/size_in_atlas = Vector2i(6, 2)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-47.842422, -16.187286, 47.662567, -16.007427, 48.741714, 16.007425, -48.561855, 15.82757)
+10:0/size_in_atlas = Vector2i(2, 2)
+10:0/0 = 0
+10:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15.827568, 1.4388695, -16.007423, -15.827568, 1.079155, -16.007427, 16.007431, -15.827568, 16.007431, 15.647711, -15.647705, 15.82757)
+12:0/size_in_atlas = Vector2i(2, 2)
+12:0/0 = 0
+12:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-14.658486, -13.939052, 14.658486, -13.759192, 14.478627, 13.579334, -14.298769, 13.219616)
+14:2/size_in_atlas = Vector2i(2, 2)
+14:2/0 = 0
+8:2/size_in_atlas = Vector2i(6, 2)
+8:2/0 = 0
+14:1/size_in_atlas = Vector2i(2, 1)
+14:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_pbi4j"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_fd14k")
+sources/1 = SubResource("TileSetAtlasSource_7u0b5")
+
+[node name="the game" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_pbi4j")
+format = 2
+layer_0/tile_data = PackedInt32Array(196607, 131073, 0, 131075, 131073, 0, 65534, 1, 2, 131077, 131073, 0, 131079, 131073, 0, 131080, 131073, 0, 131081, 786433, 0, 65542, 917505, 1, 4, 917505, 2)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_3xk0f")]
+position = Vector2(1, 11)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(1, 0)
+zoom = Vector2(10, 10)
+position_smoothing_enabled = true
