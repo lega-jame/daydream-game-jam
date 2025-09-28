@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://elst0xn32iil"]
+[gd_scene load_steps=13 format=3 uid="uid://elst0xn32iil"]
 
 [ext_resource type="PackedScene" uid="uid://bvhu5f6guikq4" path="res://background/S3.tscn" id="1_3xk0f"]
 [ext_resource type="Texture2D" uid="uid://123xl6ckv3lj" path="res://addons/rat sewer tile set/dank sewers tile set.png" id="2_fd14k"]
 [ext_resource type="Texture2D" uid="uid://316iyska1mi2" path="res://addons/rat sewer tile set/Sewer tileset.png" id="2_lrcfv"]
-[ext_resource type="PackedScene" uid="uid://dqgvg7ek30774" path="res://killzone.tscn" id="4_7u0b5"]
+[ext_resource type="Script" uid="uid://w4pr6f80hrdv" path="res://script/killzone.gd" id="4_7u0b5"]
+[ext_resource type="Texture2D" uid="uid://cjlh68c8co4h5" path="res://asset/Hearts/PNG/basic/background.png" id="4_a22u8"]
+[ext_resource type="Texture2D" uid="uid://cg7jr0bmyjp8m" path="res://asset/Hearts/PNG/basic/heart.png" id="5_doodn"]
+[ext_resource type="PackedScene" uid="uid://2oqfqxx5b61g" path="res://enemy.tscn" id="7_doodn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fd14k"]
 texture = ExtResource("2_lrcfv")
@@ -2431,8 +2434,8 @@ sources/0 = SubResource("TileSetAtlasSource_fd14k")
 sources/1 = SubResource("TileSetAtlasSource_7u0b5")
 sources/2 = SubResource("TileSetAtlasSource_pbi4j")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7u0b5"]
-distance = -1.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbi4j"]
+size = Vector2(80, 20)
 
 [node name="the game" type="Node2D"]
 
@@ -2452,11 +2455,30 @@ position = Vector2(1, 0)
 zoom = Vector2(10, 10)
 limit_left = -110
 limit_bottom = 57
-position_smoothing_enabled = true
 
-[node name="killzone" parent="." instance=ExtResource("4_7u0b5")]
-position = Vector2(180, 60)
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CharacterBody2D/Camera2D"]
+visible = false
+offset_left = -57.0
+offset_top = -32.0
+offset_right = -40.0
+offset_bottom = -15.0
+scale = Vector2(0.5, 0.5)
+value = 50.0
+texture_under = ExtResource("4_a22u8")
+texture_over = ExtResource("5_doodn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
-position = Vector2(0, -1)
-shape = SubResource("WorldBoundaryShape2D_7u0b5")
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(180, 67)
+script = ExtResource("4_7u0b5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_pbi4j")
+
+[node name="Timer" type="Timer" parent="Area2D"]
+
+[node name="fat" parent="." instance=ExtResource("7_doodn")]
+position = Vector2(138, 14)
+scale = Vector2(0.5, 0.5)
+
+[connection signal="timeout" from="Area2D/Timer" to="Area2D" method="_on_timer_timeout"]

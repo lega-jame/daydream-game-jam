@@ -1,16 +1,7 @@
-
 extends Area2D
-
-@onready var timer = $Timer
-
-
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(_body):
 	print("die")
-	timer.start()
-
-func _on_timer_timeout():
-	get_tree().reload_current_scene()
 	
