@@ -1,10 +1,11 @@
-[gd_scene load_steps=40 format=3 uid="uid://bvhu5f6guikq4"]
+[gd_scene load_steps=50 format=3 uid="uid://bvhu5f6guikq4"]
 
 [ext_resource type="Script" uid="uid://b317seaymjenv" path="res://script/s_3.gd" id="1_urpop"]
 [ext_resource type="Texture2D" uid="uid://bb8rb7yeintc0" path="res://asset/FREE_Samurai 2D Pixel Art v1.2/FREE_Samurai 2D Pixel Art v1.2/Sprites/IDLE.png" id="2_rqax6"]
 [ext_resource type="Texture2D" uid="uid://dfb37272w4y3i" path="res://asset/FREE_Samurai 2D Pixel Art v1.2/FREE_Samurai 2D Pixel Art v1.2/Sprites/HURT.png" id="3_myvvk"]
 [ext_resource type="Texture2D" uid="uid://coy7xsibvtncn" path="res://asset/FREE_Samurai 2D Pixel Art v1.2/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png" id="3_o5wyd"]
 [ext_resource type="Texture2D" uid="uid://cjlh68c8co4h5" path="res://asset/Hearts/PNG/basic/background.png" id="5_2h44b"]
+[ext_resource type="Texture2D" uid="uid://dhtges75tswxt" path="res://asset/FREE_Samurai 2D Pixel Art v1.2/FREE_Samurai 2D Pixel Art v1.2/Sprites/ATTACK 1.png" id="5_5wxik"]
 [ext_resource type="Texture2D" uid="uid://cg7jr0bmyjp8m" path="res://asset/Hearts/PNG/basic/heart.png" id="6_5wxik"]
 [ext_resource type="Texture2D" uid="uid://c5vuv6kpk4eob" path="res://asset/Hearts/PNG/basic/border.png" id="7_ev31x"]
 
@@ -71,6 +72,34 @@ region = Rect2(0, 48, 96, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_y42o2"]
 atlas = ExtResource("3_o5wyd")
 region = Rect2(672, 48, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utcdl"]
+atlas = ExtResource("5_5wxik")
+region = Rect2(0, 48, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qn0dj"]
+atlas = ExtResource("5_5wxik")
+region = Rect2(96, 48, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6o4d0"]
+atlas = ExtResource("5_5wxik")
+region = Rect2(192, 48, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mgph"]
+atlas = ExtResource("5_5wxik")
+region = Rect2(288, 48, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwp7e"]
+atlas = ExtResource("5_5wxik")
+region = Rect2(384, 48, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65npn"]
+atlas = ExtResource("5_5wxik")
+region = Rect2(480, 48, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4jq3"]
+atlas = ExtResource("5_5wxik")
+region = Rect2(576, 48, 96, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vu8xd"]
 atlas = ExtResource("3_o5wyd")
@@ -195,6 +224,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_utcdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qn0dj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6o4d0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mgph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwp7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65npn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4jq3")
+}],
+"loop": true,
+"name": &"swinging",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_mqlpa")
 }, {
 "duration": 1.0,
@@ -251,17 +306,27 @@ animations = [{
 radius = 3.0
 height = 18.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xt04p"]
+radius = 5.0
+height = 14.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b61m4"]
+radius = 9.0
+height = 20.0
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_urpop")
+max_health = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 5)
 scale = Vector2(0.52, 0.5)
 sprite_frames = SubResource("SpriteFrames_lf2rr")
-animation = &"walking"
+animation = &"swinging"
 autoplay = "Linton S3"
+frame_progress = 0.119617715
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="idle" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_t4kg7")
 
@@ -275,3 +340,16 @@ value = 100.0
 texture_under = ExtResource("5_2h44b")
 texture_over = ExtResource("7_ev31x")
 texture_progress = ExtResource("6_5wxik")
+
+[node name="running" type="CollisionShape2D" parent="."]
+position = Vector2(3, 2)
+shape = SubResource("CapsuleShape2D_xt04p")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="sword" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(15, 0)
+shape = SubResource("CapsuleShape2D_b61m4")
+
+[connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

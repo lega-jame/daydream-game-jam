@@ -8,6 +8,10 @@ var current_health := max_health
 func _ready():
 	update_health_bar()
 
+func _process(delta):
+	if Input.is_action_just_pressed("damage_enemy"):
+		take_damage(10)
+
 func take_damage(amount: int):
 	current_health = max(current_health - amount, 0)
 	update_health_bar()
